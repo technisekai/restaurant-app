@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/provider/preferences_provider.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:restaurant_app/provider/scheduling_provider.dart';
+import 'package:restaurant_app/utils/notification_helper.dart';
 
 class Setting extends StatelessWidget {
   const Setting({super.key});
@@ -9,6 +12,9 @@ class Setting extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+        FlutterLocalNotificationsPlugin();
+    final NotificationHelper _notificationHelper = NotificationHelper();
     return Scaffold(
       body: SafeArea(
         /* for responsive */
@@ -63,28 +69,29 @@ class Setting extends StatelessWidget {
                 return Consumer<SchedulingProvider>(
                   builder: (context, scheduled, _) {
                     return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          const Text(
-                            'Enable/disable daily restaurant: ',
-                            style: TextStyle(
-                                color: Color(0xFF6b7280),
-                                fontFamily: 'Open Sans',
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          /* line space */
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Switch.adaptive(
-                            value: provider.isDailyRestaurantActive,
-                            onChanged: (value) async {
-                              scheduled.scheduledRestaurant(value);
-                              provider.enableDailyRestaurant(value);
-                            },
-                          )
-                        ]);
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        const Text(
+                          'Enable/disable daily restaurant: ',
+                          style: TextStyle(
+                              color: Color(0xFF6b7280),
+                              fontFamily: 'Open Sans',
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        /* line space */
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Switch.adaptive(
+                          value: provider.isDailyRestaurantActive,
+                          onChanged: (value) async {
+                            scheduled.scheduledRestaurant(value);
+                            provider.enableDailyRestaurant(value);
+                          },
+                        ),
+                      ],
+                    );
                   },
                 );
               })

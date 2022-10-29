@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:restaurant_app/data/model/restaurant_list.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:restaurant_app/common/navigation.dart';
 
 final selectNotificationSubject = BehaviorSubject<String>();
 
@@ -34,7 +35,7 @@ class NotificationHelper {
       onDidReceiveNotificationResponse: (NotificationResponse details) async {
         final payload = details.payload;
         if (payload != null) {
-          print('notification payload: ' + payload);
+          print('notification payload: $payload');
         }
         selectNotificationSubject.add(payload ?? 'empty payload');
       },
@@ -85,7 +86,7 @@ class NotificationHelper {
       (String payload) async {
         var data = RestaurantListModel.fromJson(json.decode(payload));
         var restaurants = data.restaurants[0];
-        //Navigation.intentWithData(route, restaurants);
+        Navigation.intentWithData(route, restaurants);
       },
     );
   }

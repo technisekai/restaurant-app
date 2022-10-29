@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/preferences/preferences_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:restaurant_app/utils/notification_helper.dart';
+import 'package:restaurant_app/utils/background_service.dart';
+import 'package:restaurant_app/common/navigation.dart';
 /* api */
 import 'package:restaurant_app/data/api/api_service.dart';
 import 'package:restaurant_app/data/db/database_helper.dart';
@@ -18,13 +23,24 @@ import 'package:restaurant_app/ui/detail.dart';
 import 'package:restaurant_app/ui/search.dart';
 import 'package:restaurant_app/ui/favorite.dart';
 import 'package:restaurant_app/ui/setting.dart';
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
-//await notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-void main() {
+  final NotificationHelper notificationHelper = NotificationHelper();
+  final BackgroundService service = BackgroundService();
+
+  service.initializeIsolate();
+
+  if (Platform.isAndroid) {
+    await AndroidAlarmManager.initialize();
+  }
+  await notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
+
   runApp(const MyApp());
 }
 
@@ -61,6 +77,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'PT Sans',
           backgroundColor: const Color(0xFFFAF7F0),
         ),
+        navigatorKey: navigatorKey,
         initialRoute: '/',
         routes: {
           '/': (context) => const SplashScreen(),

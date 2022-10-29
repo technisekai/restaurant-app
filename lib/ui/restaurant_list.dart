@@ -173,7 +173,6 @@ class _RestaurantList extends State<RestaurantList> {
           ),
         ),
       ),
-      /* to search page */
     );
   }
 }
