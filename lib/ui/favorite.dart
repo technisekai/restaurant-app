@@ -64,32 +64,28 @@ class Favorite extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height - 140,
                 /* if has data input */
-                child: ChangeNotifierProvider<DatabaseProvider>(
-                  create: (context) =>
-                      DatabaseProvider(databaseHelper: DatabaseHelper()),
-                  child: Consumer<DatabaseProvider>(
-                    builder: (context, provider, child) {
-                      /* show favorite restaurant */
-                      try {
-                        if (provider.state == ResultState.hasData) {
-                          return ListView.builder(
-                            itemCount: provider.favorites.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return CardRestaurant(provider.favorites[index]);
-                            },
-                          );
-                        } else {
-                          return const Center(
-                            child: NoData(),
-                          );
-                        }
-                      } catch (e) {
-                        return const SizedBox();
+                child: Consumer<DatabaseProvider>(
+                  builder: (context, provider, child) {
+                    /* show favorite restaurant */
+                    try {
+                      if (provider.state == ResultState.hasData) {
+                        return ListView.builder(
+                          itemCount: provider.favorites.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return CardRestaurant(provider.favorites[index]);
+                          },
+                        );
+                      } else {
+                        return const Center(
+                          child: NoData(),
+                        );
                       }
-                    },
-                  ),
+                    } catch (e) {
+                      return const SizedBox();
+                    }
+                  },
                 ),
-              )
+              ),
             ],
           ),
         ),

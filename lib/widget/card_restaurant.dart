@@ -35,7 +35,7 @@ class CardRestaurant extends StatelessWidget {
                           image: NetworkImage(
                             'https://restaurant-api.dicoding.dev/images/medium/${restaurant.pictureId}',
                           ),
-                          width: 150,
+                          width: MediaQuery.of(context).size.width * 0.4,
                         ),
                       ),
                       /* whitespace */
@@ -48,7 +48,7 @@ class CardRestaurant extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           /* name restaurant */
-                          Container(
+                          SizedBox(
                             width: MediaQuery.of(context).size.width - 250,
                             child: Text(
                               restaurant.name,
@@ -74,13 +74,16 @@ class CardRestaurant extends StatelessWidget {
                                 size: 18,
                               ),
                               const SizedBox(width: 6),
-                              Text(
-                                restaurant.city,
-                                style: const TextStyle(
-                                    color: Color(0xFF6b7280),
-                                    fontFamily: 'Open Sans',
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold),
+                              SizedBox(
+                                width: 100,
+                                child: Text(
+                                  restaurant.city,
+                                  style: const TextStyle(
+                                      color: Color(0xFF6b7280),
+                                      fontFamily: 'Open Sans',
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ],
                           ),
@@ -98,13 +101,16 @@ class CardRestaurant extends StatelessWidget {
                                 size: 18,
                               ),
                               const SizedBox(width: 8),
-                              Text(
-                                restaurant.rating.toString(),
-                                style: const TextStyle(
-                                    color: Color(0xFF6b7280),
-                                    fontFamily: 'Open Sans',
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold),
+                              SizedBox(
+                                width: 50,
+                                child: Text(
+                                  restaurant.rating.toString(),
+                                  style: const TextStyle(
+                                      color: Color(0xFF6b7280),
+                                      fontFamily: 'Open Sans',
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ],
                           ),
@@ -112,23 +118,19 @@ class CardRestaurant extends StatelessWidget {
                       ),
 
                       /* if true, button action if tap will remove restaurant from favorite */
-                      Container(
-                        width: MediaQuery.of(context).size.width - 350,
-                        child: isFavorite
-                            ? IconButton(
-                                icon: const Icon(Icons.favorite),
-                                color: const Color(0xFFc80064),
-                                onPressed: () =>
-                                    provider.removeFavorite(restaurant.id),
-                              )
-                            /* if false, button action if tap will add restaurant from favorite */
-                            : IconButton(
-                                icon: const Icon(Icons.favorite),
-                                color: Colors.grey,
-                                onPressed: () =>
-                                    provider.addFavorite(restaurant),
-                              ),
-                      )
+                      isFavorite
+                          ? IconButton(
+                              icon: const Icon(Icons.favorite),
+                              color: const Color(0xFFc80064),
+                              onPressed: () =>
+                                  provider.removeFavorite(restaurant.id),
+                            )
+                          /* if false, button action if tap will add restaurant from favorite */
+                          : IconButton(
+                              icon: const Icon(Icons.favorite),
+                              color: Colors.grey,
+                              onPressed: () => provider.addFavorite(restaurant),
+                            ),
                     ],
                   ),
                   /* line spacing */

@@ -17,9 +17,9 @@ class DatabaseHelper {
   Future<Database> _initializeDb() async {
     var path = await getDatabasesPath();
     var db = openDatabase(
-      '${path}/favorite.db',
+      '$path/favorite.db',
       onCreate: (db, version) async {
-        await db.execute('''CREATE TABLE ${_tblFavorite} (
+        await db.execute('''CREATE TABLE $_tblFavorite (
              id TEXT PRIMARY KEY,
              name TEXT,
              description TEXT,

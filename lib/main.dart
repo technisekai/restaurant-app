@@ -22,6 +22,8 @@ import 'package:restaurant_app/ui/setting.dart';
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
+//await notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
+
 void main() {
   runApp(const MyApp());
 }
