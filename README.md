@@ -1,16 +1,15 @@
-# restaurant_app
+# :round_pushpin: Restaurant App
 
-A new Flutter project.
+### :ledger: Description
+Buld using flutter, this application show list of restaurants. The list restaurants data get from API. This app have some fetaures:
+1. List restaurants
 
-## Getting Started
+2. Detail restaurant
 
-This project is a starting point for a Flutter application.
+3. Add/remove favorite restaurant
 
-A few resources to get you started if this is your first Flutter project:
+4. Search restaurants
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### :runner: How To Use
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+In the restaurant-app directory, run this following command ```flutter run```
