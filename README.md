@@ -1,7 +1,7 @@
 # :round_pushpin: Restaurant App
 
 ### :ledger: Description
-Buld using flutter, this application show list of restaurants. The list restaurants data get from API. This app have some fetaures:
+Build using flutter, this application show list of restaurants. The list restaurants data get from API. This app have some fetaures:
 1. List restaurants
 
 2. Detail restaurant
